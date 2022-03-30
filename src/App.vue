@@ -2,6 +2,11 @@
   <div id="app">
       <HeaderCompo/>     <!--the component that  imported to used inside this page -->     
       <router-view/>     <!--to told project that we have router_view -->
+    
+    
+  
+  
+  
   </div>
 </template>
 

@@ -25,7 +25,7 @@
                             {{post.body}} 
                         </p>
                          <p class="card-text"><small class="text-muted">{{post.updated_at}}</small></p>
-                        <router-link  :to="{   name:'PostDetailCompo', params:{ id:post.id,title:post.title, } }" :class="'btn btn-sm btn-primary'" >
+                        <router-link  :to="{   name:'PostDetailCompo', params:{ id:post.id,title:post.title, } }" :class="'btn btn-sm btn-outline-secondary'" >
                             Go Details
                         </router-link>   
                     </div>     

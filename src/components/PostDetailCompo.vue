@@ -1,7 +1,7 @@
 <template>
   <div>
     <h1>{{ name }}</h1>
-    <div>
+    <div :class="'container'">
 
 
       {{ APIData.id }}<br />
