@@ -2,9 +2,20 @@
 <div class="container">
     <h5 class="mt-3 mb-3">{{message}}</h5>
     <div>
-        <div v-if="error" class="alert alert-warning alert-disabled fade show mt-5" role="alert">
-            <strong>{{ error }}</strong>   
+
+        <div v-if ="errors.length" class="alert alert-danger alert-disabled fade show mt-5" role="alert">
+                <p v-for="error in errors" v-bind:key="error">
+                    <strong>{{error}}</strong> 
+                </p>    
         </div>
+        
+        <div>
+            <h3>Data post to the server:</h3>
+            <p v-if="success" class="alert alert-success alert-disabled fade show mt-5" role="alert" > {{ success }}</p>
+            <pre>{{ response }}</pre>
+        </div>
+
+        
         
         <form class="form-horizontal" role="form" enctype="multipart/form-data" method="POST" v-on:submit.prevent="submitForm">
         
@@ -45,6 +56,10 @@
             </div>
 
         </form>
+        
+        
+
+
 
     </div>
 </div>
@@ -57,35 +72,98 @@
 
 
 import { getAPI } from "../axios_api.js";
+import { toast } from 'bulma-toast'
+
 export default {
-    name: 'PostFormAxios',
+
+    name: 'PostCreateCompo',
+    
+
     data(){
-        return{
-          message:'i am create post page',
-          error:"",
-          
-            form: {
-                title: '',
-                category: '',
-                author: '',
-                body: '',
-            }
-        }
+          return{
+              message:'i am create post page',
+              errors : [],
+              response: '',
+              success: '',
+            
+              form: {
+                  title: '',
+                  category: '',
+                  author: '',
+                  body: '',
+              }
+          }
     },
+
+
     methods:{
         submitForm(){
-            getAPI.post('/api_blog/v1/posts/', this.form)
-                 .then((res) => {
-                    console.log(res.data)
-                 })
-                 .catch(error => {
-                    error.response.status
-                })
-                //  .finally(() => {
-                //      //Perform action in always
-                //      console.log("i am finished")
-                //  });
+
+           this.errors = []
+            
+            if ( this.title === '' ){
+                this.errors.push('The title is required')
+            }
+            
+            if ( this.category === '' ){
+                this.errors.push('The category is required')
+            }
+            
+            if ( this.author === '' ){
+                this.errors.push('The author is required')
+            }
+            if ( this.body === '' ){
+                this.errors.push('The body is required')
+            }
+            
+            ////////  if no error found in errors array,start took data and post it to backend by axios  ///////////////
+            if (!this.errors.length) { 
+                  getAPI
+                        .post('/api_blog/v1/posts/', this.form)
+                        
+                        .then(response => {
+
+                                // https://github.com/rfoel/bulma-toast
+                                toast({
+                                        message : "Post was created successfully",
+                                        type : "is-success",
+                                        dismissible : true ,
+                                        pauseOnHover : true ,
+                                        duration : 3000 ,
+                                        position : 'bottom-right',
+                                    })
+
+
+                                  // console.log(response);
+                                  this.response = response.data
+                                  // this.success = 'Data saved successfully';
+                                  // this.response = JSON.stringify(response, null, 2)
+
+                                  // this.$router.push('/posts')
+                                  
+                       
+                       
+                       })
+                      
+                        .catch( error => {
+                                console.log( error)
+                                                    if (error.response) {
+                                                        for (const property in error.response.data ) {
+                                                            this.errors.push(`${property}: ${error.response.data[property]}`)
+                                                        }
+
+                                                    }else if (error.message) {
+                                                        this.errors.push('Something went wrong. Please try again')
+
+                                                    }
+                        })
+            }                                                     
+        
+        
+        
         }
     }
+
+
 }
 </script>

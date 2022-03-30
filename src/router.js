@@ -9,7 +9,7 @@ import HomeView from './views/HomeView.vue'
 import PostsCompo from './components/PostsCompo.vue'
 import PostDetailCompo from './components/PostDetailCompo.vue'
 import PostCreateCompo from './components/PostCreateCompo.vue'
-
+import PostUpdateCompo from './components/PostUpdateCompo.vue'
 Vue.use(VueRouter)
 
 const routes = [
@@ -27,6 +27,12 @@ const routes = [
                     path: '/posts/:id',
                     name: 'PostDetailCompo',
                     component: PostDetailCompo,
+                    props:true
+                  },
+                  {
+                    path: '/post_update/:id',
+                    name: 'PostUpdateCompo',
+                    component: PostUpdateCompo,
                     props:true
                   },
                   {
