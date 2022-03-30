@@ -8,6 +8,19 @@
       {{ APIData.title }}<br />
       {{ APIData.body }}<br />
     </div>
+    
+    <router-link
+              :class = "'btn btn-primary'"
+              :to = "{   name:'PostUpdateCompo', params:{
+                                                            id : APIData.id,
+                                                         title : APIData.title,
+                                                         category : APIData.category,
+                                                         author: APIData.author,
+                                                          body : APIData.body,  
+                                                         }}">
+              Update
+    </router-link>
+  
   </div>
 </template>
 

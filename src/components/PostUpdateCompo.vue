@@ -21,21 +21,21 @@
                 v-model="form.title" 
                 type="text" 
                 class="form-control" 
-                placeholder="Please enter your post title"> 
+                > 
                 <br>
 
                 <input 
                 v-model="form.category" 
                 type="text" 
                 class="form-control" 
-                placeholder="Please enter your post category"> 
+                > 
                 <br>
 
               <input  
                 v-model="form.author"
                 type="text"  
                 class="form-control" 
-                placeholder="Please enter the author">
+                >
                 <br>
 
 
@@ -43,7 +43,7 @@
                 v-model="form.body"
                 rows="8"  
                 class="form-control" 
-                placeholder="Please enter your post body">
+                >
                 </textarea>
                 <br>
 
@@ -73,12 +73,14 @@ export default {
               message:'i am update post page',
               error:"",
               id: this.$route.params.id,
+              title : this.$route.params.title ,
+              category: '',
             
               form: {
-                  title: '',
-                  category: '',
-                  author: '',
-                  body: '',
+                  title : this.$route.params.title ,
+                  category : this.$route.params.category,
+                  author : this.$route.params.author,
+                  body : this.$route.params.body,
               }
           }
     },
@@ -86,6 +88,7 @@ export default {
 
     methods:{
         submitForm(){
+        console.log(this.$route.params.title)
             getAPI
                  .put(`/api_blog/v1/post/${this.id}`, this.form) /// from   http://127.0.0.1:8000/post/2
                  .then((res) => {
