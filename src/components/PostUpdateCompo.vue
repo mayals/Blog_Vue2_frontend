@@ -47,7 +47,7 @@
                 </textarea>
                 <br>
 
-                <button type="submit" class="btn btn-primary">Create post</button>
+                <button type="submit" class="btn btn-primary">Update post</button>
             </div>
 
         </form>
@@ -63,7 +63,7 @@
 
 
 import { getAPI } from "../axios_api.js";
-
+import { toast } from 'bulma-toast'
 export default {
 
     name: 'PostUpdateCompo',
@@ -95,6 +95,16 @@ export default {
                     console.log(res.data)
                     this.$router.push(`/post-detail/${this.id}`)
 
+                    // https://github.com/rfoel/bulma-toast
+                        toast({
+                                message : "Post was updated successfully",
+                                type : "is-success",
+                                dismissible : true ,
+                                pauseOnHover : true ,
+                                duration : 5000 ,
+                                position : 'bottom-right',
+                            })
+                    
 
                  })
                  .catch(error => {

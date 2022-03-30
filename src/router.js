@@ -10,6 +10,7 @@ import PostsCompo from './components/PostsCompo.vue'
 import PostDetailCompo from './components/PostDetailCompo.vue'
 import PostCreateCompo from './components/PostCreateCompo.vue'
 import PostUpdateCompo from './components/PostUpdateCompo.vue'
+
 Vue.use(VueRouter)
 
 const routes = [

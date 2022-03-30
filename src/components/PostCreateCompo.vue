@@ -130,7 +130,7 @@ export default {
                                         type : "is-success",
                                         dismissible : true ,
                                         pauseOnHover : true ,
-                                        duration : 3000 ,
+                                        duration : 5000 ,
                                         position : 'bottom-right',
                                     })
 

@@ -4,27 +4,28 @@
 
     <div :class="'container'">
 
-        <div class="">
-             <router-link  type="button" class="btn btn-success  mb-5 mt-5" aria-current="page" :to="{ name:'PostCreateCompo' }">Add Post</router-link>  
+        <div class='mt-3'>
+             <router-link  type="button" class="btn btn-success" aria-current="page" :to="{ name:'PostCreateCompo' }">Add Post</router-link>  
         </div>
 
-        <h4>posts</h4>
        
         <div :class="'row g-4 py-5 row-cols-1 row-cols-lg-3'">
             <div v-for="post in APIData" :key="post.id">
                  
                 <div :class="'card'"> 
                     <div :class="'card-body'">
+
                         <h5 :class="'card-title'">
                             <router-link  :to="{name:'PostDetailCompo', params:{ id:post.id }}" :class="'card-link'">
                                 {{post.title}}   
                             </router-link>
-                        </h5>    
+                        </h5>  
+
                         <p class="card-text text-truncate">
                             {{post.body}} 
                         </p>
                          <p class="card-text"><small class="text-muted">{{post.updated_at}}</small></p>
-                        <router-link  :to="{   name:'PostDetailCompo', params:{ id:post.id,title:post.title, } }" :class="'btn btn-primary'" >
+                        <router-link  :to="{   name:'PostDetailCompo', params:{ id:post.id,title:post.title, } }" :class="'btn btn-sm btn-primary'" >
                             Go Details
                         </router-link>   
                     </div>     
