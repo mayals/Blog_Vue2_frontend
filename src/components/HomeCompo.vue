@@ -1,5 +1,7 @@
 <template>
+
   <div>
+  
     <h1>Iam HomeCompo -- {{title}}-- {{description}}</h1>
           <!-- try bootstrap5 -->
           <section class='container'>
@@ -8,6 +10,7 @@
               </div>
           </section>
   </div>
+
 </template>
 
 

@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-      <HeaderCompo/>     <!--the component that  imported to used inside this page -->     
+      <NavbarCompo/>     <!--the component that  imported to used inside this page -->     
       <router-view/>     <!--to told project that we have router_view -->
     
     
@@ -15,13 +15,13 @@
 
 <script>
 // @ is an alias to /src
-import HeaderCompo from '@/components/HeaderCompo.vue'   //import componets to use them in this page 
+import NavbarCompo from '@/components/NavbarCompo.vue'   //import componets to use them in this page 
 
 
 export default {
                 name:'App',                    //name of file you are inside it now 
                 components: {
-                        HeaderCompo,          //dictionary of names of all components in this page             
+                        NavbarCompo,          //dictionary of names of all components in this page             
                 },
 };
 </script>
