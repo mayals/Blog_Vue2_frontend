@@ -93,6 +93,9 @@ export default {
                  .put(`/api_blog/v1/post/${this.id}`, this.form) /// from   http://127.0.0.1:8000/post/2
                  .then((res) => {
                     console.log(res.data)
+                    this.$router.push(`/post-detail/${this.id}`)
+
+
                  })
                  .catch(error => {
                     error.response.status

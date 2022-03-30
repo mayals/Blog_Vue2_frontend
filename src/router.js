@@ -24,19 +24,19 @@ const routes = [
                     component: PostsCompo
                   },
                   {
-                    path: '/posts/:id',
+                    path: '/post-detail/:id',
                     name: 'PostDetailCompo',
                     component: PostDetailCompo,
                     props:true
                   },
                   {
-                    path: '/post_update/:id',
+                    path: '/post-update/:id',
                     name: 'PostUpdateCompo',
                     component: PostUpdateCompo,
                     props:true
                   },
                   {
-                    path: '/postcreate',
+                    path: '/post-create',
                     name: 'PostCreateCompo',
                     component: PostCreateCompo,
                     props:true

@@ -85,6 +85,7 @@ export default {
               errors : [],
               response: '',
               success: '',
+              id:'',
             
               form: {
                   title: '',
@@ -138,12 +139,12 @@ export default {
                                   this.response = response.data
                                   // this.success = 'Data saved successfully';
                                   // this.response = JSON.stringify(response, null, 2)
-
-                                  // this.$router.push('/posts')
                                   
-                       
-                       
-                       })
+                                  // console.log(this.id)
+                                  this.id = response.data.id
+                                  this.$router.push(`/post-detail/${this.id}`)
+
+                        })
                       
                         .catch( error => {
                                 console.log( error)
