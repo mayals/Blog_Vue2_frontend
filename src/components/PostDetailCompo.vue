@@ -1,43 +1,39 @@
 <template>
-  <div>
-    <h1>{{ name }}</h1>
-    <div :class="'container'">
+<div :class="'container'">
 
 
-      {{ APIData.id }}<br />
-      {{ APIData.title }}<br />
-      {{ APIData.body }}<br />
+    <div class="card mt-5 mb-5">
+      <div class="card-body">
+        <h2 class="card-title mb-3">{{ APIData.title }}</h2>
+        <h6 class="card-subtitle mb-5 text-muted">{{ APIData.created_at }}</h6>
+        <p class="card-text mb-5">{{ APIData.body }}</p>
+        
+        <div class=''>
+        <router-link
+            :class = "'btn btn-warning  float-right'"
+            :to = "{name:'PostUpdateCompo',
+                    params:{
+                              id : APIData.id,
+                              title : APIData.title,
+                              category : APIData.category,
+                              author: APIData.author,
+                              body : APIData.body,  
+                          }}">
+            Update
+        </router-link>
+        
+        <button type="button" class="btn btn-danger" data-toggle="modal" @click="delete_post">Delete</button>  
+        </div>
+
+      </div>
     </div>
-    
-    <router-link
-              :class = "'btn btn-info'"
-              :to = "{   name:'PostUpdateCompo', params:{
-                                                            id : APIData.id,
-                                                         title : APIData.title,
-                                                         category : APIData.category,
-                                                         author: APIData.author,
-                                                          body : APIData.body,  
-                                                         }}">
-              Update
-    </router-link>
 
-<button type="button" class="btn btn-danger pull-right" data-toggle="modal" @click="delete_post">Delete</button>
-
-    <!-- <router-link
-              :class = "'btn btn-danger'"
-              :to = "{   name:'PostDeleteCompo', params:{
-                                                            id : APIData.id,
-                                                         title : APIData.title,
-                                                         category : APIData.category,
-                                                         author: APIData.author,
-                                                          body : APIData.body,  
-                                                         }}">
-              
-    </router-link> -->
-  
-
-  </div>
+</div>
 </template>
+
+
+
+
 
 <script>
 import { getAPI } from "../axios_api.js";
