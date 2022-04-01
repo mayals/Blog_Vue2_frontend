@@ -16,7 +16,7 @@
                     <div :class="'card-body'">
 
                         <h5 :class="'card-title'">
-                            <router-link  :to="{name:'PostDetailCompo', params:{ id:post.id }}" :class="'card-link'">
+                            <router-link  :to="{name:'PostDetailCompo', params:{ id:post.id , comments:post.comments }}" :class="'card-link'">
                                 {{post.title}}   
                             </router-link>
                         </h5>  
