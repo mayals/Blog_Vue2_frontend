@@ -69,6 +69,44 @@
           </div>
         </div>
 
+        
+        <!--   add comment form    -->
+        <div>
+        <form class="form-horizontal" role="form" enctype="multipart/form-data" method="POST" v-on:submit.prevent="addcomment_form">
+ 
+            <div class="form-group" style="padding:14px;">
+                
+                <input 
+                v-model="form.post" 
+                type="text" 
+                class="form-control" 
+                placeholder="Please enter your post title"> 
+                <br>
+
+                <textarea  
+                v-model="form.text"
+                rows="8"  
+                class="form-control" 
+                placeholder="Please enter your comment text">
+                </textarea>
+                <br>
+
+                <input 
+                v-model="form.comment_by" 
+                type="text" 
+                class="form-control" 
+                placeholder="Please enter comment by"> 
+                <br>
+
+
+                <button type="submit" class="btn btn-primary">Add Comment</button>
+            </div>
+
+        </form>
+        </div>
+
+
+
 </div>
 </template>
 
@@ -91,6 +129,14 @@ export default {
               all_comments:"",
               id: this.$route.params.id,
               name: "PostDetailCompo",
+
+              form: {
+                  post: '',
+                  text: '',
+                  comment_by: '',
+              }
+
+
             };
           },
 
@@ -165,7 +211,50 @@ export default {
 
 
 
+                  addcomment_form(){
 
+                    getAPI
+                        .post('/api_blog/v1/comments/', this.form)
+                        
+                        .then(response => {
+
+                                // https://github.com/rfoel/bulma-toast
+                                toast({
+                                        message : "Comment was created successfully",
+                                        type : "is-success",
+                                        dismissible : true ,
+                                        pauseOnHover : true ,
+                                        duration : 5000 ,
+                                        position : 'bottom-right',
+                                    })
+
+                                  console.log(response);
+                                  this.response = response.data
+                                  // this.success = 'Data saved successfully';
+                                  // this.response = JSON.stringify(response, null, 2)
+                        })
+                      
+                        .catch( error => {
+                                console.log( error)
+                                                    if (error.response) {
+                                                        for (const property in error.response.data ) {
+                                                            this.errors.push(`${property}: ${error.response.data[property]}`)
+                                                        }
+
+                                                    }else if (error.message) {
+                                                        this.errors.push('Something went wrong. Please try again')
+
+                                                    }
+                        })
+            
+
+
+
+
+
+
+
+                  }
 
           }
 };
