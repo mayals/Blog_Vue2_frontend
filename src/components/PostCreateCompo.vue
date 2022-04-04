@@ -12,9 +12,14 @@
         <div>
             <h3>Data post to the server:</h3>
             <p v-if="success" class="alert alert-success alert-disabled fade show mt-5" role="alert" > {{ success }}</p>
-            <pre>{{ response }}</pre>
+     
         </div>
 
+                <!-- <div v-for="category in  APIData_categories"  :key="category.id">
+                 {{ category.name}}
+                </div>    -->
+                
+                
         
         
         <form class="form-horizontal" role="form" enctype="multipart/form-data" method="POST" v-on:submit.prevent="submitForm">
@@ -28,13 +33,8 @@
                 class="form-control" 
                 placeholder="Please enter your post title"> 
                 <br>
-
-                <input 
-                v-model="form.category" 
-                type="text" 
-                class="form-control" 
-                placeholder="Please enter your post category"> 
-                <br>
+                
+                
 
               <input  
                 v-model="form.author"
@@ -43,6 +43,14 @@
                 placeholder="Please enter the author">
                 <br>
 
+
+                <select v-model=" form.category">
+                    <option v-for="category in APIData_categories"  :key="category.id">
+                      {{ category.name}}
+                    </option>
+                </select>
+                <br>
+                <br>
 
                 <textarea  
                 v-model="form.body"
@@ -56,11 +64,7 @@
             </div>
 
         </form>
-        
-        
-
-
-
+      
     </div>
 </div>
 </template>
@@ -80,21 +84,47 @@ export default {
     
 
     data(){
-          return{
-              message:'i am create post page',
-              errors : [],
-              response: '',
-              success: '',
-              id:'',
+        return{
+            message:'i am create post page',
+            errors : [],
+           
+            success: '',
+            id:'',
+           
+
             
-              form: {
-                  title: '',
-                  category: '',
-                  author: '',
-                  body: '',
-              }
-          }
+            APIData_categories : [],
+           
+          
+            form: {
+                title: '',
+                category: '',
+                author: '',
+                body: '',
+            }
+        }
     },
+
+
+
+    created(){
+        getAPI.get('/api_blog/v1/categories/',)
+            .then(response => {
+                this.APIData_categories = response.data
+                // console.log('postAPI has received categories data') ;
+                // console.log(response) ;
+                console.log(response.data) ;
+                 console.log(this.form.category) ; 
+                  console.log(response.data) ;
+                // console.log(this.APIData_categories) ; 
+                         
+                })
+            .catch(err => {
+                console.log(err)
+                })                
+    
+    },
+
 
 
     methods:{
@@ -119,34 +149,34 @@ export default {
             
             ////////  if no error found in errors array,start took data and post it to backend by axios  ///////////////
             if (!this.errors.length) { 
-                  getAPI
-                        .post('/api_blog/v1/posts/', this.form)
+                getAPI
+                    .post('/api_blog/v1/posts/', this.form)
                         
-                        .then(response => {
+                    .then(response => {
 
-                                // https://github.com/rfoel/bulma-toast
-                                toast({
-                                        message : "Post was created successfully",
-                                        type : "is-success",
-                                        dismissible : true ,
-                                        pauseOnHover : true ,
-                                        duration : 5000 ,
-                                        position : 'bottom-right',
-                                    })
+                        // https://github.com/rfoel/bulma-toast
+                        toast({
+                                message : "Post was created successfully",
+                                type : "is-success",
+                                dismissible : true ,
+                                pauseOnHover : true ,
+                                duration : 5000 ,
+                                position : 'bottom-right',
+                            })
 
 
-                                  // console.log(response);
-                                  this.response = response.data
-                                  // this.success = 'Data saved successfully';
-                                  // this.response = JSON.stringify(response, null, 2)
-                                  
-                                  // console.log(this.id)
-                                  this.id = response.data.id
-                                  this.$router.push(`/post-detail/${this.id}`)
+                            // console.log(response);
+                            this.response = response.data
+                            // this.success = 'Data saved successfully';
+                            // this.response = JSON.stringify(response, null, 2)
+                            
+                            // console.log(this.id)
+                            this.id = response.data.id
+                            this.$router.push(`/post-detail/${this.id}`)
 
-                        })
+                    })
                       
-                        .catch( error => {
+                    .catch( error => {
                                 console.log( error)
                                                     if (error.response) {
                                                         for (const property in error.response.data ) {
@@ -157,11 +187,8 @@ export default {
                                                         this.errors.push('Something went wrong. Please try again')
 
                                                     }
-                        })
-            }                                                     
-        
-        
-        
+                    })
+            }                                                      
         }
     }
 

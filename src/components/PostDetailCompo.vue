@@ -5,6 +5,7 @@
     <div class="card mt-5 mb-5">
       <div class="card-body">
         <h2 class="card-title mb-3">{{ APIData.title }}</h2>
+        <p class="card-title mb-3">{{ APIData.category }}</p>
         <p class="card-subtitle mb-5 text-muted"><small>{{ APIData.created_at }}</small></p>
         <p class="card-text mb-3">{{ APIData.body }}</p>
    
