@@ -2,13 +2,14 @@
 
   <div>
   
-    <h1>Iam HomeCompo -- {{title}}-- {{description}}</h1>
+          <h1>Iam HomeCompo -- {{title}}-- {{description}}</h1>
           <!-- try bootstrap5 -->
           <section class='container'>
               <div class="alert alert-success" role="alert">
                   my try of bootstrap it is work :)
               </div>
           </section>
+          
   </div>
 
 </template>
