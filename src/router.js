@@ -5,15 +5,33 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 
 // import all views from views folder
+
 import HomeView from './views/HomeView.vue'
+
+import LoginCompo from './components/LoginCompo.vue'
+import SignupCompo from './components/SignupCompo.vue'
+
 import PostsCompo from './components/PostsCompo.vue'
 import PostDetailCompo from './components/PostDetailCompo.vue'
 import PostCreateCompo from './components/PostCreateCompo.vue'
 import PostUpdateCompo from './components/PostUpdateCompo.vue'
 
+
+
 Vue.use(VueRouter)
 
 const routes = [
+
+                  {
+                    path: '/login',
+                    name: 'LoginCompo',
+                    component:LoginCompo
+                  },
+                  {
+                    path: '/signup',
+                    name: 'SignupCompo',
+                    component: SignupCompo
+                  },
                   {
                     path: '/',
                     name: 'HomeView',
