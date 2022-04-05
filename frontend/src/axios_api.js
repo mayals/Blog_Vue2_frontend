@@ -1,4 +1,5 @@
-// "vue-axios": "^3.4.1",
+// "vuex": "^2.0.0"
+// npm install vuex@2.0.0 --save
 //https://www.npmjs.com/package/vue-axios
 
 import axios from "axios";
