@@ -1,4 +1,5 @@
 # Blog_API_frontend_Vue2
+## I have used :
 
         "@popperjs/core": "^2.11.4",
         "animate.css": "^4.1.1",
